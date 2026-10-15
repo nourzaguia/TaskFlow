@@ -20,8 +20,9 @@ public class Main {
                 switch (saisir("Votre choix : ")) {
                     case "1" -> ajouter();
                     case "2" -> afficher();
+                    case "3" -> terminer();
                     case "0" -> { quitter(); return; }
-                    default -> System.out.println("Erreur : choisissez 0, 1 ou 2.");
+                    default -> System.out.println("Erreur : choisissez 0, 1, 2 ou 3.");
                 }
                 System.out.println();
             }
@@ -35,6 +36,7 @@ public class Main {
 
                 1. Ajouter une tâche
                 2. Afficher les tâches
+                3. Marquer une tâche comme terminée
                 0. Quitter
                 """);
     }
@@ -153,4 +155,47 @@ public class Main {
 
     private static class Annulation extends RuntimeException { }
     private static class FinSaisie extends RuntimeException { }
+
+    private void terminer() {
+        System.out.println("\nMARQUER UNE TÂCHE COMME TERMINÉE\n");
+
+        if (gestion.getTaches().isEmpty()) {
+            System.out.println("Aucune tâche à terminer.");
+            return;
+        }
+
+        Tache tache = choisirTache();
+
+        if (tache == null) {
+            return;
+        }
+
+        if (tache.estTerminee()) {
+            System.out.println("Cette tâche est déjà terminée.");
+            return;
+        }
+
+        tache.terminer();
+
+        System.out.println("La tâche « " + tache.getTitre()
+                + " » est maintenant terminée.");
+    }
+
+    private Tache choisirTache() {
+        try {
+            int id = Integer.parseInt(saisir("Identifiant de la tâche : "));
+            if (id <= 0) {
+                throw new NumberFormatException();
+            }
+
+            Tache tache = gestion.trouver(id);
+            if (tache == null) {
+                System.out.println("Erreur : identifiant inexistant.");
+            }
+            return tache;
+        } catch (NumberFormatException e) {
+            System.out.println("Erreur : l'identifiant doit être un entier positif.");
+            return null;
+        }
+    }
 }

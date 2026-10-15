@@ -31,4 +31,13 @@ public class GestionTaches {
     public List<Tache> getTaches() {
         return Collections.unmodifiableList(taches);
     }
+
+    public Tache trouver(int id) {
+        for (Tache tache : taches) {
+            if (tache.getId() == id) {
+                return tache;
+            }
+        }
+        return null;
+    }
 }
