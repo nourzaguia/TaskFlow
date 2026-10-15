@@ -19,8 +19,9 @@ public class Main {
             while (true) {
                 switch (saisir("Votre choix : ")) {
                     case "1" -> ajouter();
+                    case "2" -> afficher();
                     case "0" -> { quitter(); return; }
-                    default -> System.out.println("Erreur : choisissez 1 ou 0.");
+                    default -> System.out.println("Erreur : choisissez 0, 1 ou 2.");
                 }
                 System.out.println();
             }
@@ -33,6 +34,7 @@ public class Main {
         System.out.println("""
 
                 1. Ajouter une tâche
+                2. Afficher les tâches
                 0. Quitter
                 """);
     }
@@ -111,6 +113,38 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Erreur : " + e.getMessage());
         }
+    }
+
+    private void afficher() {
+        if (gestion.getTaches().isEmpty()) {
+            System.out.println("\nAucune tâche à afficher.");
+            return;
+        }
+
+        System.out.println("\nLISTE DES TÂCHES\n");
+
+        // La largeur suit le titre le plus long pour conserver des colonnes lisibles.
+        int largeur = 55;
+        for (Tache tache : gestion.getTaches()) {
+            largeur = Math.max(largeur, tache.getTitre().length());
+        }
+
+        String format = "%-6s %-" + largeur + "s %-10s %-13s %s%n";
+
+        System.out.printf(format, "ID", "Titre", "Priorité", "Échéance", "Statut");
+
+        for (Tache tache : gestion.getTaches()) {
+            System.out.printf(
+                    format,
+                    tache.getId(),
+                    tache.getTitre(),
+                    tache.getPriorite(),
+                    tache.afficherEcheance(),
+                    tache.getStatut()
+            );
+        }
+
+        System.out.println("\nNombre de tâches : " + gestion.getTaches().size());
     }
 
     private void quitter() {
