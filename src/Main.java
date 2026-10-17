@@ -20,8 +20,9 @@ public class Main {
                 switch (saisir("Votre choix : ")) {
                     case "1" -> ajouter();
                     case "2" -> afficher();
+                    case "4" -> modifierPriorite();
                     case "0" -> { quitter(); return; }
-                    default -> System.out.println("Erreur : choisissez 0, 1 ou 2.");
+                    default -> System.out.println("Erreur : choisissez 0, 1, 2 ou 4.");
                 }
                 System.out.println();
             }
@@ -35,6 +36,7 @@ public class Main {
 
                 1. Ajouter une tâche
                 2. Afficher les tâches
+                4. Modifier la priorité d’une tâche
                 0. Quitter
                 """);
     }
@@ -145,6 +147,48 @@ public class Main {
         }
 
         System.out.println("\nNombre de tâches : " + gestion.getTaches().size());
+    }
+
+    private void modifierPriorite() {
+        System.out.println("\nMODIFIER LA PRIORITÉ\n");
+
+        Tache tache = choisirTache();
+        if (tache == null) {
+            return;
+        }
+
+        Priorite ancienne = tache.getPriorite();
+        System.out.println("Tâche : " + tache.getTitre());
+        System.out.println("Priorité actuelle : " + ancienne);
+        System.out.println("Priorités possibles : Basse, Normale ou Élevée.");
+
+        try {
+            Priorite nouvelle = Priorite.lire(saisir("Nouvelle priorité : "));
+            tache.setPriorite(nouvelle);
+            System.out.println("La priorité de la tâche " + tache.getId()
+                    + " a été modifiée : " + ancienne + " → " + nouvelle + ".");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+            System.out.println("La priorité actuelle est conservée.");
+        }
+    }
+
+    private Tache choisirTache() {
+        try {
+            int id = Integer.parseInt(saisir("Identifiant de la tâche : "));
+            if (id <= 0) {
+                throw new NumberFormatException();
+            }
+
+            Tache tache = gestion.trouver(id);
+            if (tache == null) {
+                System.out.println("Erreur : identifiant inexistant.");
+            }
+            return tache;
+        } catch (NumberFormatException e) {
+            System.out.println("Erreur : l'identifiant doit être un entier positif.");
+            return null;
+        }
     }
 
     private void quitter() {
