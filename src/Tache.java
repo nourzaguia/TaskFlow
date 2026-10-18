@@ -39,6 +39,9 @@ public class Tache {
     public String getTitre() { return titre; }
     public Priorite getPriorite() { return priorite; }
     public LocalDate getEcheance() { return echeance; }
+    public void setEcheance(LocalDate echeance) {
+    this.echeance = echeance;
+}
     public boolean estTerminee() { return terminee; }
     public String getStatut() { return terminee ? "Terminée" : "À faire"; }
     public String afficherEcheance() { return echeance == null ? "Aucune" : echeance.toString(); }
