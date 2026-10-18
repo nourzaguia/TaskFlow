@@ -132,7 +132,7 @@ private void gererEcheance() {
         switch (saisir("Votre action : ")) {
             case "1" -> {
                 try {
-                    LocalDate date = Tache.lireDate(saisir("Nouvelle échéance : "));
+                    LocalDate date = Tache.lireDate(saisir("Nouvelle échéance (AAAA-MM-JJ) : "));
                     tache.setEcheance(date);
                     System.out.println("\nL’échéance de la tâche " + tache.getId()
                             + " est maintenant : " + date + ".");
@@ -141,12 +141,15 @@ private void gererEcheance() {
                     System.out.println("L’échéance actuelle est conservée.");
                 }
             }
+                        case "2" -> {
+                tache.setEcheance(null);
+                System.out.println("\nL’échéance de la tâche " + tache.getId() + " a été retirée.");
+            }
             case "0" -> System.out.println("Modification annulée.");
             default -> System.out.println("Erreur : action invalide. L’échéance actuelle est conservée.");
         }
     }
 
- 
     private void afficher() {
         if (gestion.getTaches().isEmpty()) {
             System.out.println("\nAucune tâche à afficher.");
@@ -210,32 +213,6 @@ private void gererEcheance() {
         System.out.println("La tâche « " + tache.getTitre()
                 + " » est maintenant terminée.");
     }
-    
-private void attribuerEcheance() {
-    System.out.println("\nATTRIBUER UNE ÉCHÉANCE\n");
-
-    Tache tache = choisirTache();
-    if (tache == null) return;
-
-    if (tache.getEcheance() != null) {
-        System.out.println("Cette tâche possède déjà une échéance.");
-        return;
-    }
-
-    try {
-        String valeur = saisir("Échéance (AAAA-MM-JJ) : ");
-        LocalDate date = Tache.lireDate(valeur);
-
-        tache.setEcheance(date);
-
-        System.out.println("L’échéance de la tâche "
-                + tache.getId() + " est maintenant : " + date + ".");
-
-    } catch (IllegalArgumentException e) {
-        System.out.println("Erreur : " + e.getMessage());
-        System.out.println("Aucune échéance n’a été attribuée.");
-    }
-}
 
     private Tache choisirTache() {
         try {
