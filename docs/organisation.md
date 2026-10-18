@@ -194,6 +194,4 @@ La répartition suivante reprend les quatre itérations du document de travail.
 
 ## 7. Ajustements apportés à la démarche
 
-### 7.1. Ajustements visibles dans les éléments fournis (À faire)
-
 ## 8. Contribution de chaque membre (À FAIRE)
