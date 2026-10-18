@@ -21,9 +21,7 @@ public class Main {
                     case "1" -> ajouter();
                     case "2" -> afficher();
                     case "3" -> terminer();
-                    
-                    case "5" -> attribuerEcheance();
-
+                    case "5" -> gererEcheance();
                     case "0" -> { quitter(); return; }
                     default -> System.out.println("Erreur : choisissez 0, 1, 2 ou 3.");
                 }
@@ -36,12 +34,14 @@ public class Main {
 
     private void afficherMenu() {
         System.out.println("""
-
                 1. Ajouter une tâche
                 2. Afficher les tâches
                 3. Marquer une tâche comme terminée
-                5. Attribuer une échéance
+                4. Modifier la priorité d’une tâche
+                5. Gérer l’échéance d’une tâche
+                6. Sauvegarder les données
                 0. Quitter
+
                 """);
 
                 
@@ -104,7 +104,7 @@ public class Main {
                     System.out.println("Corrigez la saisie ou tapez /annuler.");
                 }
             }
-
+            
             // La création attend la validation de tous les champs :
             // une annulation ne crée donc aucune tâche.
             Tache tache = gestion.ajouter(titre, priorite, echeance);
@@ -123,6 +123,30 @@ public class Main {
         }
     }
 
+private void gererEcheance() {
+        System.out.println("\nGÉRER L’ÉCHÉANCE\n");
+        Tache tache = choisirTache();
+        if (tache == null) return;
+        System.out.println("Échéance actuelle : " + tache.afficherEcheance());
+        System.out.println("\n1. Définir ou modifier l’échéance\n2. Retirer l’échéance\n0. Annuler\n");
+        switch (saisir("Votre action : ")) {
+            case "1" -> {
+                try {
+                    LocalDate date = Tache.lireDate(saisir("Nouvelle échéance : "));
+                    tache.setEcheance(date);
+                    System.out.println("\nL’échéance de la tâche " + tache.getId()
+                            + " est maintenant : " + date + ".");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("\nErreur : " + e.getMessage());
+                    System.out.println("L’échéance actuelle est conservée.");
+                }
+            }
+            case "0" -> System.out.println("Modification annulée.");
+            default -> System.out.println("Erreur : action invalide. L’échéance actuelle est conservée.");
+        }
+    }
+
+ 
     private void afficher() {
         if (gestion.getTaches().isEmpty()) {
             System.out.println("\nAucune tâche à afficher.");
