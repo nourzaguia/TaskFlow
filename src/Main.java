@@ -254,9 +254,4 @@ private void gererEcheance() {
                 + " » est maintenant terminée.");
     }
 
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erreur : " + e.getMessage());
-            System.out.println("Aucune échéance n’a été attribuée.");
-        }
-    }
 }
