@@ -16,7 +16,16 @@ public class Main {
     private void executer() {
         System.out.println("TASKFLOW — Gestion des tâches\n");
         gestion = new GestionTaches(new ArrayList<>());
-        afficherMenu();
+
+try {
+    gestion = new GestionTaches(fichier.charger());
+    System.out.println("Tâches sauvegardées rechargées : "
+            + gestion.getTaches().size());
+} catch (IOException | SecurityException e) {
+    System.out.println("Erreur : impossible de charger les tâches sauvegardées.");
+}
+
+afficherMenu();
 
         try {
             while (true) {
