@@ -42,7 +42,7 @@ public class Tache {
     public boolean estTerminee() { return terminee; }
     public String getStatut() { return terminee ? "Terminée" : "À faire"; }
     public String afficherEcheance() { return echeance == null ? "Aucune" : echeance.toString(); }
-
+    public void setEcheance(LocalDate echeance) { this.echeance = echeance; }
     public void terminer() {
         terminee = true;
     }

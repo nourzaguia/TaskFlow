@@ -21,6 +21,7 @@ public class Main {
                     case "1" -> ajouter();
                     case "2" -> afficher();
                     case "3" -> terminer();
+                    case "6" -> modifierEcheance();
                     case "0" -> { quitter(); return; }
                     default -> System.out.println("Erreur : choisissez 0, 1, 2 ou 3.");
                 }
@@ -37,6 +38,7 @@ public class Main {
                 1. Ajouter une tâche
                 2. Afficher les tâches
                 3. Marquer une tâche comme terminée
+                6. Modifier une échéance
                 0. Quitter
                 """);
     }
@@ -98,7 +100,7 @@ public class Main {
                     System.out.println("Corrigez la saisie ou tapez /annuler.");
                 }
             }
-
+            
             // La création attend la validation de tous les champs :
             // une annulation ne crée donc aucune tâche.
             Tache tache = gestion.ajouter(titre, priorite, echeance);
@@ -116,7 +118,35 @@ public class Main {
             System.out.println("Erreur : " + e.getMessage());
         }
     }
+    
+private void modifierEcheance() {
+    System.out.println("\nMODIFIER UNE ÉCHÉANCE\n");
 
+    Tache tache = choisirTache();
+    if (tache == null) return;
+
+    if (tache.getEcheance() == null) {
+        System.out.println("Cette tâche ne possède pas d'échéance à modifier.");
+        return;
+    }
+
+    System.out.println("Échéance actuelle : " + tache.afficherEcheance());
+
+    try {
+        String valeur = saisir("Nouvelle échéance (AAAA-MM-JJ) : ");
+        LocalDate nouvelleDate = Tache.lireDate(valeur);
+
+        tache.setEcheance(nouvelleDate);
+
+        System.out.println("L'échéance de la tâche "
+                + tache.getId() + " est maintenant : " + nouvelleDate + ".");
+
+    } catch (IllegalArgumentException e) {
+        System.out.println("Erreur : " + e.getMessage());
+        System.out.println("L'échéance actuelle est conservée.");
+    }
+}
+ 
     private void afficher() {
         if (gestion.getTaches().isEmpty()) {
             System.out.println("\nAucune tâche à afficher.");
