@@ -20,9 +20,11 @@ public class Main {
                 switch (saisir("Votre choix : ")) {
                     case "1" -> ajouter();
                     case "2" -> afficher();
+                    case "3" -> terminer();
                     case "4" -> modifierPriorite();
+                    case "5" -> attribuerEcheance();
                     case "0" -> { quitter(); return; }
-                    default -> System.out.println("Erreur : choisissez 0, 1, 2 ou 4.");
+                    default -> System.out.println("Erreur : choisissez une option de 0 à 5.");
                 }
                 System.out.println();
             }
@@ -36,7 +38,9 @@ public class Main {
 
                 1. Ajouter une tâche
                 2. Afficher les tâches
+                3. Marquer une tâche comme terminée
                 4. Modifier la priorité d’une tâche
+                5. Attribuer une échéance
                 0. Quitter
                 """);
     }
@@ -197,4 +201,54 @@ public class Main {
 
     private static class Annulation extends RuntimeException { }
     private static class FinSaisie extends RuntimeException { }
+    private void terminer() {
+        System.out.println("\nMARQUER UNE TÂCHE COMME TERMINÉE\n");
+
+        if (gestion.getTaches().isEmpty()) {
+            System.out.println("Aucune tâche à terminer.");
+            return;
+        }
+
+        Tache tache = choisirTache();
+
+        if (tache == null) {
+            return;
+        }
+
+        if (tache.estTerminee()) {
+            System.out.println("Cette tâche est déjà terminée.");
+            return;
+        }
+
+        tache.terminer();
+
+        System.out.println("La tâche « " + tache.getTitre()
+                + " » est maintenant terminée.");
+    }
+
+    private void attribuerEcheance() {
+        System.out.println("\nATTRIBUER UNE ÉCHÉANCE\n");
+
+        Tache tache = choisirTache();
+        if (tache == null) return;
+
+        if (tache.getEcheance() != null) {
+            System.out.println("Cette tâche possède déjà une échéance.");
+            return;
+        }
+
+        try {
+            String valeur = saisir("Échéance (AAAA-MM-JJ) : ");
+            LocalDate date = Tache.lireDate(valeur);
+
+            tache.setEcheance(date);
+
+            System.out.println("L’échéance de la tâche "
+                    + tache.getId() + " est maintenant : " + date + ".");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur : " + e.getMessage());
+            System.out.println("Aucune échéance n’a été attribuée.");
+        }
+    }
 }
