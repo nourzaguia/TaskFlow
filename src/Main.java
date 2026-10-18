@@ -22,7 +22,7 @@ public class Main {
                     case "2" -> afficher();
                     case "3" -> terminer();
                     case "4" -> modifierPriorite();
-                    case "5" -> attribuerEcheance();
+                    case "5" -> gererEcheance();
                     case "0" -> { quitter(); return; }
                     default -> System.out.println("Erreur : choisissez une option de 0 à 5.");
                 }
@@ -35,13 +35,14 @@ public class Main {
 
     private void afficherMenu() {
         System.out.println("""
-
                 1. Ajouter une tâche
                 2. Afficher les tâches
                 3. Marquer une tâche comme terminée
                 4. Modifier la priorité d’une tâche
-                5. Attribuer une échéance
+                5. Gérer l’échéance d’une tâche
+                6. Sauvegarder les données
                 0. Quitter
+
                 """);
     }
 
@@ -102,7 +103,7 @@ public class Main {
                     System.out.println("Corrigez la saisie ou tapez /annuler.");
                 }
             }
-
+            
             // La création attend la validation de tous les champs :
             // une annulation ne crée donc aucune tâche.
             Tache tache = gestion.ajouter(titre, priorite, echeance);
@@ -118,6 +119,33 @@ public class Main {
             System.out.println("Ajout annulé. Aucune tâche n’a été ajoutée.");
         } catch (IllegalArgumentException e) {
             System.out.println("Erreur : " + e.getMessage());
+        }
+    }
+
+private void gererEcheance() {
+        System.out.println("\nGÉRER L’ÉCHÉANCE\n");
+        Tache tache = choisirTache();
+        if (tache == null) return;
+        System.out.println("Échéance actuelle : " + tache.afficherEcheance());
+        System.out.println("\n1. Définir ou modifier l’échéance\n2. Retirer l’échéance\n0. Annuler\n");
+        switch (saisir("Votre action : ")) {
+            case "1" -> {
+                try {
+                    LocalDate date = Tache.lireDate(saisir("Nouvelle échéance (AAAA-MM-JJ) : "));
+                    tache.setEcheance(date);
+                    System.out.println("\nL’échéance de la tâche " + tache.getId()
+                            + " est maintenant : " + date + ".");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("\nErreur : " + e.getMessage());
+                    System.out.println("L’échéance actuelle est conservée.");
+                }
+            }
+                        case "2" -> {
+                tache.setEcheance(null);
+                System.out.println("\nL’échéance de la tâche " + tache.getId() + " a été retirée.");
+            }
+            case "0" -> System.out.println("Modification annulée.");
+            default -> System.out.println("Erreur : action invalide. L’échéance actuelle est conservée.");
         }
     }
 
@@ -225,26 +253,6 @@ public class Main {
         System.out.println("La tâche « " + tache.getTitre()
                 + " » est maintenant terminée.");
     }
-
-    private void attribuerEcheance() {
-        System.out.println("\nATTRIBUER UNE ÉCHÉANCE\n");
-
-        Tache tache = choisirTache();
-        if (tache == null) return;
-
-        if (tache.getEcheance() != null) {
-            System.out.println("Cette tâche possède déjà une échéance.");
-            return;
-        }
-
-        try {
-            String valeur = saisir("Échéance (AAAA-MM-JJ) : ");
-            LocalDate date = Tache.lireDate(valeur);
-
-            tache.setEcheance(date);
-
-            System.out.println("L’échéance de la tâche "
-                    + tache.getId() + " est maintenant : " + date + ".");
 
         } catch (IllegalArgumentException e) {
             System.out.println("Erreur : " + e.getMessage());
