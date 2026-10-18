@@ -1,18 +1,25 @@
+import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Main {
     private final Scanner clavier = new Scanner(System.in, "UTF-8");
     private GestionTaches gestion;
-
+    private final FichierTaches fichier =
+        new FichierTaches(Path.of("data", "taches.tsv"));
     public static void main(String[] args) {
         new Main().executer();
     }
 
     private void executer() {
         System.out.println("TASKFLOW — Gestion des tâches\n");
-        gestion = new GestionTaches(new ArrayList<>());
+        try {
+    gestion = new GestionTaches(fichier.charger());
+} catch (IOException | SecurityException e) {
+    System.out.println("Impossible de lire le fichier de données.");
+    gestion = new GestionTaches(new ArrayList<>());
+}
         afficherMenu();
 
         try {
@@ -23,8 +30,9 @@ public class Main {
                     case "3" -> terminer();
                     case "4" -> modifierPriorite();
                     case "5" -> gererEcheance();
+                    case "6" -> sauvegarder();
                     case "0" -> { quitter(); return; }
-                    default -> System.out.println("Erreur : choisissez une option de 0 à 5.");
+                    default -> System.out.println("Erreur : choisissez une option de 0 à 6.");
                 }
                 System.out.println();
             }
@@ -32,6 +40,17 @@ public class Main {
             quitter();
         }
     }
+
+private void sauvegarder() {
+    System.out.println("\nSAUVEGARDE DES DONNÉES\n");
+
+    try {
+        fichier.sauvegarder(gestion.getTaches());
+        System.out.println("Sauvegarde réussie.");
+    } catch (IOException | SecurityException e) {
+        System.out.println("Erreur : impossible de sauvegarder les données.");
+    }
+}
 
     private void afficherMenu() {
         System.out.println("""
