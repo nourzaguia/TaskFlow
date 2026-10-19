@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     private final Scanner clavier = new Scanner(System.in, "UTF-8");
@@ -16,9 +15,14 @@ public class Main {
         System.out.println("TASKFLOW — Gestion des tâches\n");
         try {
     gestion = new GestionTaches(fichier.charger());
+} catch (FichierTaches.FormatInvalideException e) {
+    System.out.println("Erreur de format : " + e.getMessage());
+    System.out.println("TaskFlow ne peut pas démarrer pour protéger vos données.");
+    return;
 } catch (IOException | SecurityException e) {
-    System.out.println("Impossible de lire le fichier de données.");
-    gestion = new GestionTaches(new ArrayList<>());
+    System.out.println("Erreur de lecture : impossible d'accéder au fichier de données.");
+    System.out.println("TaskFlow ne peut pas démarrer pour protéger vos données.");
+    return;
 }
         afficherMenu();
 
@@ -31,14 +35,15 @@ public class Main {
                     case "4" -> modifierPriorite();
                     case "5" -> gererEcheance();
                     case "6" -> sauvegarder();
-                    case "0" -> { quitter(); return; }
+                    case "0" -> { sauvegarder(); quitter(); return; }
                     default -> System.out.println("Erreur : choisissez une option de 0 à 6.");
                 }
                 System.out.println();
             }
         } catch (FinSaisie e) {
-            quitter();
-        }
+    sauvegarder();
+    quitter();
+}
     }
 
 private void sauvegarder() {
