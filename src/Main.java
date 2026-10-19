@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     private final Scanner clavier = new Scanner(System.in, "UTF-8");
@@ -17,10 +16,12 @@ public class Main {
         try {
     gestion = new GestionTaches(fichier.charger());
 } catch (IOException | SecurityException e) {
-    System.out.println("Impossible de lire le fichier de données.");
-    gestion = new GestionTaches(new ArrayList<>());
+    System.out.println("Erreur : impossible de charger le fichier de données.");
+    System.out.println("Détail : " + e.getMessage());
+    System.out.println("Démarrage interrompu pour éviter une perte de données.");
+    return;
 }
-        afficherMenu();
+     afficherMenu();
 
         try {
             while (true) {

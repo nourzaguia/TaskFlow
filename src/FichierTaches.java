@@ -55,7 +55,7 @@ public class FichierTaches {
                 String[] champs = ligne.split("\t", -1);
 
                 if (champs.length != 5) {
-                    throw new IOException("Format de tâche invalide.");
+                    throw new IOException("Fichier mal formé : une ligne ne contient pas les 5 champs attendus.");
                 }
 
                 try {
@@ -75,7 +75,7 @@ public class FichierTaches {
                             id, titre, priorite, echeance, terminee));
                 } catch (RuntimeException e) {
                     throw new IOException(
-                            "Impossible de lire une tâche dans le fichier.", e);
+                        "Fichier mal formé : une tâche contient des données invalides.", e);
                 }
             }
         }
