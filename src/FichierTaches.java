@@ -10,6 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FichierTaches {
+        public static class FormatInvalideException extends IOException {
+        public FormatInvalideException(String message) {
+            super(message);
+        }
+
+        public FormatInvalideException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
     private final Path chemin;
 
     public FichierTaches(Path chemin) {
@@ -50,14 +59,16 @@ public class FichierTaches {
         try (BufferedReader reader = Files.newBufferedReader(
                 chemin, StandardCharsets.UTF_8)) {
             String ligne;
+            int numeroLigne = 0;
 
             while ((ligne = reader.readLine()) != null) {
+               numeroLigne++;
                 String[] champs = ligne.split("\t", -1);
 
-                if (champs.length != 5) {
-                    throw new IOException("Fichier mal formé : une ligne ne contient pas les 5 champs attendus.");
-                }
-
+             if (champs.length != 5) {
+                  throw new FormatInvalideException(
+                    "Format invalide à la ligne " + numeroLigne + ".");
+}
                 try {
                     int id = Integer.parseInt(champs[0]);
                     String titre = champs[1];
@@ -74,11 +85,11 @@ public class FichierTaches {
                     taches.add(new Tache(
                             id, titre, priorite, echeance, terminee));
                 } catch (RuntimeException e) {
-                    throw new IOException(
-                        "Fichier mal formé : une tâche contient des données invalides.", e);
+    throw new FormatInvalideException(
+            "Données invalides à la ligne " + numeroLigne + ".", e);
+}
                 }
             }
-        }
 
         return taches;
     }
