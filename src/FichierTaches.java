@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,7 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FichierTaches {
+        public static class FormatInvalideException extends IOException {
+        public FormatInvalideException(String message) {
+            super(message);
+        }
 
+        public FormatInvalideException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
     private final Path chemin;
 
     public FichierTaches(Path chemin) {

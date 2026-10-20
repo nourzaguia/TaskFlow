@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Main {
     private final Scanner clavier = new Scanner(System.in, "UTF-8");
     private GestionTaches gestion;
@@ -36,15 +34,41 @@ afficherMenu();
                     case "4" -> modifierPriorite();
                     case "5" -> gererEcheance();
                     case "6" -> sauvegarder();
-                    case "0" -> { quitter(); return; }
-                    default -> System.out.println("Erreur : choisissez une option de 0 à 5.");
+                    case "0" -> {
+    if (sauvegarder()) {
+        quitter();
+        return;
+    }
+    System.out.println("La fermeture est annulée. Vous pouvez réessayer.");
+}
+                    default -> System.out.println("Erreur : choisissez une option de 0 à 6.");
                 }
                 System.out.println();
             }
         } catch (FinSaisie e) {
-            quitter();
-        }
+    if (sauvegarder()) {
+        quitter();
+    } else {
+        System.out.println("Les données n'ont pas été sauvegardées.");
+        System.out.println("Le programme reste ouvert pour protéger vos données.");
     }
+}
+    }
+
+
+private boolean sauvegarder() {
+    System.out.println("\nSAUVEGARDE DES DONNÉES\n");
+
+    try {
+        fichier.sauvegarder(gestion.getTaches());
+        System.out.println("Sauvegarde réussie.");
+        return true;
+    } catch (IOException | SecurityException e) {
+        System.out.println("Erreur : impossible de sauvegarder les données.");
+        return false;
+    }
+}
+
 
     private void afficherMenu() {
         System.out.println("""
