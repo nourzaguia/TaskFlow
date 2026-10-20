@@ -35,27 +35,41 @@ public class Main {
                     case "4" -> modifierPriorite();
                     case "5" -> gererEcheance();
                     case "6" -> sauvegarder();
-                    case "0" -> { sauvegarder(); quitter(); return; }
+                    case "0" -> {
+    if (sauvegarder()) {
+        quitter();
+        return;
+    }
+    System.out.println("La fermeture est annulée. Vous pouvez réessayer.");
+}
                     default -> System.out.println("Erreur : choisissez une option de 0 à 6.");
                 }
                 System.out.println();
             }
         } catch (FinSaisie e) {
-    sauvegarder();
-    quitter();
+    if (sauvegarder()) {
+        quitter();
+    } else {
+        System.out.println("Les données n'ont pas été sauvegardées.");
+        System.out.println("Le programme reste ouvert pour protéger vos données.");
+    }
 }
     }
 
-private void sauvegarder() {
+
+private boolean sauvegarder() {
     System.out.println("\nSAUVEGARDE DES DONNÉES\n");
 
     try {
         fichier.sauvegarder(gestion.getTaches());
         System.out.println("Sauvegarde réussie.");
+        return true;
     } catch (IOException | SecurityException e) {
         System.out.println("Erreur : impossible de sauvegarder les données.");
+        return false;
     }
 }
+
 
     private void afficherMenu() {
         System.out.println("""
