@@ -1,12 +1,24 @@
+
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FichierTaches {
+        public static class FormatInvalideException extends IOException {
+        public FormatInvalideException(String message) {
+            super(message);
+        }
 
+        public FormatInvalideException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
     private final Path chemin;
 
     public FichierTaches(Path chemin) {
