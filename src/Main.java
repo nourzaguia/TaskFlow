@@ -186,7 +186,21 @@ private void gererEcheance() {
             default -> System.out.println("Erreur : action invalide. L’échéance actuelle est conservée.");
         }
     }
+    private void sauvegarder() {
+    System.out.println("\nSAUVEGARDE DES DONNÉES\n");
 
+    try {
+        fichier.sauvegarder(gestion.getTaches());
+
+        System.out.println("Sauvegarde réussie : "
+                + gestion.getTaches().size()
+                + " tâches enregistrées.");
+
+    } catch (IOException | SecurityException e) {
+        System.out.println("Erreur : impossible d'écrire dans le fichier de données.");
+        System.out.println("Les modifications n'ont pas été sauvegardées.");
+    }
+}
     private void afficher() {
         if (gestion.getTaches().isEmpty()) {
             System.out.println("\nAucune tâche à afficher.");
