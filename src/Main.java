@@ -13,18 +13,17 @@ public class Main {
 
     private void executer() {
         System.out.println("TASKFLOW — Gestion des tâches\n");
-        try {
+        gestion = new GestionTaches(new ArrayList<>());
+
+try {
     gestion = new GestionTaches(fichier.charger());
-} catch (FichierTaches.FormatInvalideException e) {
-    System.out.println("Erreur de format : " + e.getMessage());
-    System.out.println("TaskFlow ne peut pas démarrer pour protéger vos données.");
-    return;
+    System.out.println("Tâches sauvegardées rechargées : "
+            + gestion.getTaches().size());
 } catch (IOException | SecurityException e) {
-    System.out.println("Erreur de lecture : impossible d'accéder au fichier de données.");
-    System.out.println("TaskFlow ne peut pas démarrer pour protéger vos données.");
-    return;
+    System.out.println("Erreur : impossible de charger les tâches sauvegardées.");
 }
-        afficherMenu();
+
+afficherMenu();
 
         try {
             while (true) {
