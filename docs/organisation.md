@@ -18,14 +18,32 @@ Le projet utilise une démarche agile Scrum. Le travail est organisé en itérat
 | Responsabilité Scrum | Membre | Responsabilités dans le projet |
 | --- | --- | --- |
 | Product Owner | Yasmina Belambri | Définir l’objectif du produit, clarifier les besoins et ordonner le Product Backlog selon la valeur attendue. |
-| Scrum Master | Nour Zaguia | Faciliter l’application de Scrum, aider à résoudre les obstacles et favoriser l’amélioration du fonctionnement de l’équipe. |
+| Scrum Master | Asma Noufel | Faciliter l’application de Scrum, aider à résoudre les obstacles et favoriser l’amélioration du fonctionnement de l’équipe. |
 | Developers | Abd El Illah Kasbadji / Asma Noufel / Fairouz Maameri / Nour Zaguia / Yasmina Belambri | Estimer le travail, préparer le Sprint Backlog, développer, vérifier, revoir et intégrer les fonctionnalités. |
 
 Le Product Owner décide de l’ordre des besoins dans le Product Backlog. Les Developers déterminent comment les réaliser et la quantité de travail qu’ils peuvent prendre en charge pendant un Sprint.
 La qualité est une responsabilité collective : les fonctionnalités doivent respecter la définition de terminé avant d’être considérées comme terminées.
 
+### 2.1. Règles de fonctionnement
+
+| Élément | Fonctionnement de l’équipe |
+| --- | --- |
+| Communication | Les membres se réunissent sur Microsoft Teams pour répartir le travail, poser leurs questions et signaler les difficultés. |
+| Prise de décision | Les décisions concernant le produit et l’organisation sont discutées en équipe. En cas de désaccord, les membres comparent les solutions selon les exigences du projet et recherchent un consensus. Si le désaccord persiste, la décision est prise à la majorité et consignée. |
+| Signalement des blocages | Un membre qui rencontre un blocage le signale dans une Issue en décrivant le problème et l’aide nécessaire. |
+| Développement | Chaque travail est associé à une Issue et réalisé dans une branche distincte. |
+| Revue | Une pull request est examinée par un autre membre. La revue précise le code relu, les vérifications faites et les corrections nécessaires. |
+| Intégration | Les corrections demandées sont apportées avant la fusion. La version intégrée est compilée et les fonctionnalités concernées sont vérifiées. |
+| Suivi du travail | Le tableau GitHub Projects utilise les états À faire, En cours, À vérifier et Terminé. |
+| Passage à En cours | Le membre commence le travail associé à l’Issue. |
+| Passage à À vérifier | Le code est prêt à être relu et la pull request est ouverte. |
+| Passage à Terminé | Le travail respecte la définition de terminé : critères satisfaits, vérifications effectuées, revue réalisée, code intégré et documentation mise à jour. |
+
+
+
 ## 3. Product Backlog
 
+### 3.1. Ressources du projet
 
 | Ressource | Lien |
 | --- | --- |
@@ -36,7 +54,7 @@ La qualité est une responsabilité collective : les fonctionnalités doivent re
 
 ### 3.2. Récits utilisateurs et correspondance avec le code
 
-Les identifiants ci-dessous correspondent aux douze récits visibles dans les captures GitHub. Le traitement d’un échec de sauvegarde est inclus dans **US08**.
+Les douze récits utilisateurs sont suivis dans les Issues GitHub indiquées ci-dessous. Les Issues présentent les besoins, les critères d’acceptation et l’état du travail.
 
 | Récit | Fonctionnalité | Issue | Réalisation dans le code fourni |
 | --- | --- | --- | --- |
@@ -60,6 +78,7 @@ Les identifiants ci-dessous correspondent aux douze récits visibles dans les ca
 | Initialiser la structure du projet | [#1](https://github.com/nourzaguia/TaskFlow/issues/1) | Mettre en place les dossiers et le point d’entrée de l’application. |
 | Définir la structure d’une tâche | [#9](https://github.com/nourzaguia/TaskFlow/issues/9) | Définir les données et les règles de validation d’une tâche. |
 | Corriger l’erreur de compilation dans `Main.java` | [#24](https://github.com/nourzaguia/TaskFlow/issues/24) | Corriger la structure des blocs pour rétablir la compilation. |
+| Corriger le chargement et la sauvegarde des tâches | [#30](https://github.com/nourzaguia/TaskFlow/issues/30) | Corriger les erreurs de compilation, le rechargement des priorités et l’arrêt du démarrage lorsque le fichier est illisible ou mal formé. |
 
 ## 4. Priorités et estimations
 
@@ -80,18 +99,18 @@ Les estimations sont exprimées en **heures de travail estimées**.
 
 | Récit | Fonctionnalité | Priorité et justification | Estimation et justification |
 | --- | --- | --- | --- |
-| US01 | Ajouter une tâche | **P1** — Permet de créer les données nécessaires aux autres fonctionnalités. | **4 h** — Saisie, validations, annulation, identifiant unique et confirmation. |
-| US02 | Afficher les tâches | **P1** — Permet de consulter les tâches créées. | **2 h** — Affichage en colonnes, nombre de tâches et traitement de la liste vide. |
-| US03 | Terminer une tâche | **P2** — Permet de suivre l’avancement du travail. | **2 h** — Recherche par identifiant, changement de statut et tâche déjà terminée. |
-| US04 | Modifier la priorité | **P2** — Permet d’ajuster l’importance d’une tâche. | **2 h** — Saisie, validation et conservation de l’ancienne valeur en cas d’erreur. |
-| US05 | Attribuer une échéance | **P2** — Permet de fixer une date de réalisation. | **2 h** — Attribution, validation du format et vérification de la date. |
-| US06 | Modifier une échéance | **P2** — Permet d’adapter une date existante. | **1 h** — Réutilisation de la recherche et de la validation des dates. |
-| US07 | Retirer une échéance | **P2** — Permet de conserver une tâche sans date. | **1 h** — Retrait de la date et affichage de l’absence d’échéance. |
-| US08 | Sauvegarder les tâches et signaler un échec | **P3** — Permet de conserver les données et d’informer l’utilisateur si l’écriture échoue. | **5 h** — Format TSV, écriture temporaire, remplacement du fichier et traitement des erreurs. |
-| US09 | Recharger les tâches sauvegardées | **P3** — Permet de reprendre le travail après une fermeture. | **3 h** — Lecture, reconstruction des tâches et calcul du prochain identifiant. |
-| US10 | Démarrer sans fichier de données | **P3** — Permet une première utilisation de l’application. | **1 h** — Détection du fichier absent et initialisation d’une liste vide. |
-| US11 | Être informé d’un fichier illisible | **P3** — Évite de poursuivre avec des données impossibles à lire. | **2 h** — Traitement de l’erreur, message et interruption du démarrage. |
-| US12 | Être informé d’un fichier mal formé | **P3** — Empêche le chargement de données incohérentes. | **3 h** — Vérification de l’en-tête, des champs, des valeurs et des doublons. |
+| US01 | Ajouter une tâche | **P1** - Permet de créer les données nécessaires aux autres fonctionnalités. | **4 h** - Saisie, validations, annulation, identifiant unique et confirmation. |
+| US02 | Afficher les tâches | **P1** - Permet de consulter les tâches créées. | **2 h** - Affichage en colonnes, nombre de tâches et traitement de la liste vide. |
+| US03 | Terminer une tâche | **P2** - Permet de suivre l’avancement du travail. | **2 h** - Recherche par identifiant, changement de statut et tâche déjà terminée. |
+| US04 | Modifier la priorité | **P2** - Permet d’ajuster l’importance d’une tâche. | **2 h** - Saisie, validation et conservation de l’ancienne valeur en cas d’erreur. |
+| US05 | Attribuer une échéance | **P2** - Permet de fixer une date de réalisation. | **2 h** - Attribution, validation du format et vérification de la date. |
+| US06 | Modifier une échéance | **P2** - Permet d’adapter une date existante. | **1 h** - Réutilisation de la recherche et de la validation des dates. |
+| US07 | Retirer une échéance | **P2** - Permet de conserver une tâche sans date. | **1 h** - Retrait de la date et affichage de l’absence d’échéance. |
+| US08 | Sauvegarder les tâches et signaler un échec | **P3** - Permet de conserver les données et d’informer l’utilisateur si l’écriture échoue. | **5 h** - Format TSV, écriture des données et traitement des erreurs. |
+| US09 | Recharger les tâches sauvegardées | **P3** - Permet de reprendre le travail après une fermeture. | **3 h** - Lecture, reconstruction des tâches et calcul du prochain identifiant. |
+| US10 | Démarrer sans fichier de données | **P3** - Permet une première utilisation de l’application. | **1 h** - Détection du fichier absent et initialisation d’une liste vide. |
+| US11 | Être informé d’un fichier illisible | **P3** - Évite de poursuivre avec des données impossibles à lire. | **2 h** - Traitement de l’erreur, message et interruption du démarrage. |
+| US12 | Être informé d’un fichier mal formé | **P3** - Empêche le chargement de données incohérentes. | **3 h** - Vérification de l’en-tête, des champs, des valeurs et des doublons. |
 | **Total** | | | **28 h** |
 
 Ce total reprend les estimations des récits. Il n’inclut pas séparément les événements Scrum, les tâches techniques et les corrections imprévues.
@@ -126,7 +145,7 @@ La répartition suivante reprend les quatre itérations du document de travail.
 | 3 | Gérer les échéances. | US05, US06 et US07 | Une application permettant d’attribuer, de modifier et de retirer une échéance. | 4 h |
 | 4 | Conserver et retrouver les tâches. | US08 à US12 | Une application permettant de sauvegarder, de recharger et de traiter les erreurs de fichier. | 14 h |
 
-### 6.2. Sprint 1 — Créer et consulter les tâches
+### 6.2. Sprint 1 - Créer et consulter les tâches
 
 **Objectif du Sprint :** permettre à l’utilisateur de créer une tâche et de consulter la liste.
 
@@ -140,9 +159,7 @@ La répartition suivante reprend les quatre itérations du document de travail.
 
 **Vérifications à consigner :** ajout valide, titre vide, priorité par défaut, échéance absente, valeurs invalides, annulation et affichage d’une liste vide.
 
-**Bilan réel du Sprint :** 
-
-### 6.3. Sprint 2 — Suivre l’avancement et ajuster les priorités
+### 6.3. Sprint 2 - Suivre l’avancement et ajuster les priorités
 
 **Objectif du Sprint :** permettre de terminer une tâche et d’adapter sa priorité.
 
@@ -156,9 +173,7 @@ La répartition suivante reprend les quatre itérations du document de travail.
 
 **Vérifications à consigner :** identifiant invalide ou inconnu, changement de statut, tâche déjà terminée et modification de priorité.
 
-**Bilan réel du Sprint :** 
-
-### 6.4. Sprint 3 — Gérer les échéances
+### 6.4. Sprint 3 - Gérer les échéances
 
 **Objectif du Sprint :** permettre d’attribuer, de modifier et de retirer une date.
 
@@ -172,9 +187,7 @@ La répartition suivante reprend les quatre itérations du document de travail.
 
 **Vérifications à consigner :** attribution, modification, retrait, annulation, format incorrect, date impossible et conservation de l’échéance après un refus.
 
-**Bilan réel du Sprint :** 
-
-### 6.5. Sprint 4 — Conserver et retrouver les tâches
+### 6.5. Sprint 4 - Conserver et retrouver les tâches
 
 **Objectif du Sprint :** conserver les tâches entre deux utilisations et gérer les erreurs de fichier.
 
@@ -190,8 +203,23 @@ La répartition suivante reprend les quatre itérations du document de travail.
 
 **Vérifications à consigner :** sauvegarde suivie d’un redémarrage, conservation des champs, nouvel identifiant distinct, fichier absent, erreur d’écriture et fichier invalide.
 
-**Bilan réel du Sprint :** 
+### 6.6. Bilans des itérations et vérifications
 
-## 7. Ajustements apportés à la démarche
+Les résultats détaillés des tests de la version vérifiée sont présentés dans [verification.md](verification.md).
 
-## 8. Contribution de chaque membre (À FAIRE)
+| Sprint | Résultat fonctionnel vérifié | Vérifications documentées | Version obtenue |
+| --- | --- | --- | --- | --- | --- |
+| 1 — Créer et consulter les tâches | L’ajout et l’affichage fonctionnent. Les valeurs par défaut sont appliquées. Un titre composé d’espaces est refusé et l’ajout peut être annulé. Deux tâches peuvent avoir le même titre avec des identifiants différents. | Scénarios 1 à 6 de `verification.md`. | [1](https://github.com/nourzaguia/TaskFlow/commit/4bb2c160b3c23c1087b82911d339b2e27d0c5404) |
+| 2 — Statut et priorité | Une tâche peut être terminée. Une tâche déjà terminée et un identifiant inconnu sont signalés. La priorité peut être modifiée et une valeur invalide est refusée. | Scénarios 7 à 11 de `verification.md`. | [2](https://github.com/nourzaguia/TaskFlow/commit/378049f394b55a978318f4f9001f7ff24759102a) |
+| 3 — Échéances | L’attribution, la modification et le retrait fonctionnent. Un format incorrect est refusé et une date passée valide est acceptée. Le test de la date impossible reste à terminer dans les résultats actuellement fournis. | Scénarios 12 et 13 de `verification.md`. | [3](https://github.com/nourzaguia/TaskFlow/commit/44d3f4ca5317bf963d21669e0daee505228b4345)|
+| 4 — Sauvegarde et rechargement | La sauvegarde et le rechargement ont été essayés. Une nouvelle tâche reçoit un identifiant distinct après rechargement. Les fichiers mal formés ou illisibles bloquent le démarrage. Une erreur de sauvegarde est signalée. | Scénarios 14 à 18 de `verification.md`. | 4 |
+
+## 7. Contribution de chaque membre
+
+| Membre | Récits utilisateurs réalisés | Pull requests ouvertes | Revues de code effectuées et vérifications | Tâches techniques et corrections |
+| ------ | ---------------------------- | ---------------------- | ----------------------------------------- | -------------------------------- |
+| Abd El Illah Kasbadji | US08 - Sauvegarder les tâches : [#13](https://github.com/nourzaguia/TaskFlow/issues/13)<br>US09 - Recharger les tâches sauvegardées : [#14](https://github.com/nourzaguia/TaskFlow/issues/14)<br>Contribution à US10 -  Démarrer sans fichier de données : [#15](https://github.com/nourzaguia/TaskFlow/issues/15) | [#26](https://github.com/nourzaguia/TaskFlow/pull/26) - feat: US08 Sauvegarder les taches<br>[#27](https://github.com/nourzaguia/TaskFlow/pull/27) - feat: US09 Recharger les taches sauvegardées<br>[#28](https://github.com/nourzaguia/TaskFlow/pull/28) - feat: US10 Démarrer sans fichier de données | [#29](https://github.com/nourzaguia/TaskFlow/pull/29) - feat: gestion des fichiers illisibles et mal formés (US11, US12) | - |
+| Asma Noufel | US05 - Attribuer une échéance : [#7](https://github.com/nourzaguia/TaskFlow/issues/7)<br>US06 - Modifier une échéance : [#8](https://github.com/nourzaguia/TaskFlow/issues/8)<br>US07 - Retirer une échéance : [#12](https://github.com/nourzaguia/TaskFlow/issues/12) | [#21](https://github.com/nourzaguia/TaskFlow/pull/21) - Attribuer une échéance<br>[#22](https://github.com/nourzaguia/TaskFlow/pull/22) - Modifier une échéance<br>[#23](https://github.com/nourzaguia/TaskFlow/pull/23) - Retirer une échéance | [#19](https://github.com/nourzaguia/TaskFlow/pull/19) - US-03 : ajouter la fonctionnalite terminer une tache<br>[#20](https://github.com/nourzaguia/TaskFlow/pull/20) - US-04 : modifier la priorité d'une tâche<br>[#25](https://github.com/nourzaguia/TaskFlow/pull/25) - Corriger le bloc catch et les accolades dans Main.java | - |
+| Fairouz Maameri | US10 - Démarrer sans fichier de données : [#15](https://github.com/nourzaguia/TaskFlow/issues/15) - responsabilité principale à confirmer<br>US11 - Être informé d’un fichier illisible : [#16](https://github.com/nourzaguia/TaskFlow/issues/16)<br>US12 - Être informé d’un fichier mal formé : [#17](https://github.com/nourzaguia/TaskFlow/issues/17) | [#29](https://github.com/nourzaguia/TaskFlow/pull/29) - feat: gestion des fichiers illisibles et mal formés (US11, US12). Fermée sans fusion sur la capture. | [#26](https://github.com/nourzaguia/TaskFlow/pull/26) - feat: US08 Sauvegarder les taches<br>[#27](https://github.com/nourzaguia/TaskFlow/pull/27) - feat: US09 Recharger les taches sauvegardées<br>[#28](https://github.com/nourzaguia/TaskFlow/pull/28) - feat: US10 Démarrer sans fichier de données | - |
+| Nour Zaguia | US01 - Ajouter une tâche : [#3](https://github.com/nourzaguia/TaskFlow/issues/3)<br>US02 - Afficher les tâches : [#4](https://github.com/nourzaguia/TaskFlow/issues/4) | [#2](https://github.com/nourzaguia/TaskFlow/pull/2) - Initialiser la structure du projet<br>[#10](https://github.com/nourzaguia/TaskFlow/pull/10) - Ajouter les classes de base de TaskFlow<br>[#11](https://github.com/nourzaguia/TaskFlow/pull/11) - US-01 - Ajouter une tâche<br>[#18](https://github.com/nourzaguia/TaskFlow/pull/18) - Ajouter l’affichage des tâches<br>[#25](https://github.com/nourzaguia/TaskFlow/pull/25) - Corriger le bloc catch et les accolades dans Main.java<br>[#31](https://github.com/nourzaguia/TaskFlow/pull/31) - Corriger le chargement et la sauvegarde des tâches | [#21](https://github.com/nourzaguia/TaskFlow/pull/21) - Attribuer une échéance<br>[#22](https://github.com/nourzaguia/TaskFlow/pull/22) - Modifier une échéance<br>[#23](https://github.com/nourzaguia/TaskFlow/pull/23) - Retirer une échéance| Définir la structure d’une tâche : Issue [#9](https://github.com/nourzaguia/TaskFlow/issues/9), PR [#10](https://github.com/nourzaguia/TaskFlow/pull/10)<br>Corriger l’erreur de compilation : Issue [#24](https://github.com/nourzaguia/TaskFlow/issues/24), PR [#25](https://github.com/nourzaguia/TaskFlow/pull/25)<br>Corriger le chargement et la sauvegarde : PR [#31](https://github.com/nourzaguia/TaskFlow/pull/31) |
+| Yasmina Belambri | US03 - Terminer une tâche : [#5](https://github.com/nourzaguia/TaskFlow/issues/5)<br>US04 - Modifier la priorité d’une tâche : [#6](https://github.com/nourzaguia/TaskFlow/issues/6) | [#19](https://github.com/nourzaguia/TaskFlow/pull/19) - US-03 : ajouter la fonctionnalite terminer une tache<br>[#20](https://github.com/nourzaguia/TaskFlow/pull/20) - US-04 : modifier la priorité d'une tâche | [#11](https://github.com/nourzaguia/TaskFlow/pull/11) - US-01 - Ajouter une tâche<br>[#18](https://github.com/nourzaguia/TaskFlow/pull/18) - Ajouter l’affichage des tâches | - |
