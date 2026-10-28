@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FichierTaches {
         public static class FormatInvalideException extends IOException {
@@ -50,8 +52,10 @@ public void sauvegarder(List<Tache> taches) throws IOException {
 }
 public List<Tache> charger() throws IOException {
     List<Tache> taches = new ArrayList<>();
+    Set<Integer> ids = new HashSet<>();
 
-    if (!Files.exists(chemin)) {
+    // Si le fichier n'existe pas, on démarre avec une liste vide.
+    if (Files.notExists(chemin)) {
         return taches;
     }
 
@@ -64,25 +68,32 @@ public List<Tache> charger() throws IOException {
             String[] champs = ligne.split("\t", -1);
 
             if (champs.length != 5) {
-                continue;
+                throw new FormatInvalideException("Nombre de champs invalide.");
             }
 
             try {
                 int id = Integer.parseInt(champs[0]);
                 String titre = champs[1];
-                Priorite priorite = Priorite.valueOf(champs[2]);
+                Priorite priorite = Priorite.lire(champs[2]);
 
                 LocalDate echeance = champs[3].isEmpty()
                         ? null
                         : Tache.lireDate(champs[3]);
 
+                if (!champs[4].equals("true") && !champs[4].equals("false")) {
+                    throw new IllegalArgumentException("Statut invalide.");
+                }
+
                 boolean terminee = Boolean.parseBoolean(champs[4]);
 
-                taches.add(new Tache(
-                        id, titre, priorite, echeance, terminee));
+                if (!ids.add(id)) {
+                    throw new IllegalArgumentException("Identifiant en double.");
+                }
+
+                taches.add(new Tache(id, titre, priorite, echeance, terminee));
+
             } catch (IllegalArgumentException e) {
-                System.err.println(
-                        "Ligne ignorée : données de tâche invalides.");
+                throw new FormatInvalideException("Données de tâche invalides.", e);
             }
         }
     }

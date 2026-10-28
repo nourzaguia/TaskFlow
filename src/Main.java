@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.ArrayList;
+
+
 public class Main {
     private final Scanner clavier = new Scanner(System.in, "UTF-8");
     private GestionTaches gestion;
@@ -20,7 +23,9 @@ try {
     System.out.println("Tâches sauvegardées rechargées : "
             + gestion.getTaches().size());
 } catch (IOException | SecurityException e) {
-    System.out.println("Erreur : impossible de charger les tâches sauvegardées.");
+    System.out.println("Erreur : le fichier de données est illisible ou mal formé.");
+    System.out.println("Démarrage interrompu. Le fichier n'a pas été modifié.");
+    return;
 }
 
 afficherMenu();
@@ -50,7 +55,6 @@ afficherMenu();
         quitter();
     } else {
         System.out.println("Les données n'ont pas été sauvegardées.");
-        System.out.println("Le programme reste ouvert pour protéger vos données.");
     }
 }
     }
@@ -185,21 +189,7 @@ private void gererEcheance() {
             default -> System.out.println("Erreur : action invalide. L’échéance actuelle est conservée.");
         }
     }
-    private void sauvegarder() {
-    System.out.println("\nSAUVEGARDE DES DONNÉES\n");
-
-    try {
-        fichier.sauvegarder(gestion.getTaches());
-
-        System.out.println("Sauvegarde réussie : "
-                + gestion.getTaches().size()
-                + " tâches enregistrées.");
-
-    } catch (IOException | SecurityException e) {
-        System.out.println("Erreur : impossible d'écrire dans le fichier de données.");
-        System.out.println("Les modifications n'ont pas été sauvegardées.");
-    }
-}
+    
     private void afficher() {
         if (gestion.getTaches().isEmpty()) {
             System.out.println("\nAucune tâche à afficher.");
