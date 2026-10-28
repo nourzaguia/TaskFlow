@@ -26,6 +26,7 @@
 ## Les commandes pour compiler et exécuter l'application
 
 Compilation : javac -encoding UTF-8 -d out src/*.java
+
 Exécution : java -Dfile.encoding=UTF-8 -cp out Main
 
 ## Un exemple d'utilisation
