@@ -1,0 +1,88 @@
+TASKFLOW — Gestion des tâches
+
+Tâches sauvegardées rechargées : 3
+1. Ajouter une tâche
+2. Afficher les tâches
+3. Marquer une tâche comme terminée
+4. Modifier la priorité d’une tâche
+5. Gérer l’échéance d’une tâche
+6. Sauvegarder les données
+0. Quitter
+
+
+Votre choix : 
+GÉRER L’ÉCHÉANCE
+
+Identifiant de la tâche : Échéance actuelle : 2026-12-05
+
+1. Définir ou modifier l’échéance
+2. Retirer l’échéance
+0. Annuler
+
+Votre action : Nouvelle échéance (AAAA-MM-JJ) : 
+L’échéance de la tâche 1 est maintenant : 2026-12-01.
+
+Votre choix : 
+GÉRER L’ÉCHÉANCE
+
+Identifiant de la tâche : Échéance actuelle : 2026-12-10
+
+1. Définir ou modifier l’échéance
+2. Retirer l’échéance
+0. Annuler
+
+Votre action : 
+L’échéance de la tâche 3 a été retirée.
+
+Votre choix : 
+GÉRER L’ÉCHÉANCE
+
+Identifiant de la tâche : Échéance actuelle : 2026-12-01
+
+1. Définir ou modifier l’échéance
+2. Retirer l’échéance
+0. Annuler
+
+Votre action : Nouvelle échéance (AAAA-MM-JJ) : 
+Erreur : 2026-02-30 n’est pas une date valide.
+L’échéance actuelle est conservée.
+
+Votre choix : 
+GÉRER L’ÉCHÉANCE
+
+Identifiant de la tâche : Échéance actuelle : 2026-12-01
+
+1. Définir ou modifier l’échéance
+2. Retirer l’échéance
+0. Annuler
+
+Votre action : Erreur : action invalide. L’échéance actuelle est conservée.
+
+Votre choix : 
+GÉRER L’ÉCHÉANCE
+
+Identifiant de la tâche : Échéance actuelle : 2026-12-01
+
+1. Définir ou modifier l’échéance
+2. Retirer l’échéance
+0. Annuler
+
+Votre action : Modification annulée.
+
+Votre choix : 
+LISTE DES TÂCHES
+
+ID     Titre                                                   Priorité   Échéance      Statut
+1      Vérifier la sauvegarde du serveur                       Élevée     2026-12-01    À faire
+2      Mettre à jour le guide utilisateur                      Normale    Aucune        Terminée
+3      Préparer le poste de travail du nouvel employé          Basse      Aucune        À faire
+
+Nombre de tâches : 3
+
+Votre choix : 
+SAUVEGARDE DES DONNÉES
+
+Sauvegarde réussie.
+
+Fermeture de TaskFlow.
+Au revoir !

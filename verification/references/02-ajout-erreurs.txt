@@ -1,0 +1,64 @@
+TASKFLOW — Gestion des tâches
+
+Tâches sauvegardées rechargées : 0
+1. Ajouter une tâche
+2. Afficher les tâches
+3. Marquer une tâche comme terminée
+4. Modifier la priorité d’une tâche
+5. Gérer l’échéance d’une tâche
+6. Sauvegarder les données
+0. Quitter
+
+
+Votre choix : 
+AJOUTER UNE TÂCHE
+
+Titre : Erreur : le titre est obligatoire.
+Veuillez saisir un titre ou annuler l’ajout avec /annuler.
+Titre : 
+Priorité : Basse, Normale ou Élevée
+Appuyez sur Entrée pour choisir Normale.
+Votre priorité : Erreur : la priorité doit être Basse, Normale ou Élevée.
+Corrigez la saisie ou tapez /annuler.
+Votre priorité : 
+Échéance au format AAAA-MM-JJ
+Appuyez sur Entrée pour ne pas préciser d’échéance.
+Votre échéance : Erreur : 2026-13-45 n’est pas une date valide.
+Corrigez la saisie ou tapez /annuler.
+Votre échéance : Erreur : « 05/12/2026 » n’est pas un format de date valide.
+Le format attendu est AAAA-MM-JJ.
+Corrigez la saisie ou tapez /annuler.
+Votre échéance : Erreur : 2026-02-30 n’est pas une date valide.
+Corrigez la saisie ou tapez /annuler.
+Votre échéance : 
+Tâche ajoutée avec succès.
+
+Identifiant : 1
+Titre       : Traiter la demande d’accès VPN
+Priorité    : Normale
+Échéance    : 2026-12-08
+Statut      : À faire
+
+Votre choix : 
+AJOUTER UNE TÂCHE
+
+Titre : 
+Priorité : Basse, Normale ou Élevée
+Appuyez sur Entrée pour choisir Normale.
+Votre priorité : Ajout annulé. Aucune tâche n’a été ajoutée.
+
+Votre choix : 
+LISTE DES TÂCHES
+
+ID     Titre                                                   Priorité   Échéance      Statut
+1      Traiter la demande d’accès VPN                          Normale    2026-12-08    À faire
+
+Nombre de tâches : 1
+
+Votre choix : 
+SAUVEGARDE DES DONNÉES
+
+Sauvegarde réussie.
+
+Fermeture de TaskFlow.
+Au revoir !

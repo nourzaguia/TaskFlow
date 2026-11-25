@@ -1,0 +1,4 @@
+TASKFLOW — Gestion des tâches
+
+Erreur : le fichier de données est illisible ou mal formé.
+Démarrage interrompu. Le fichier n'a pas été modifié.
