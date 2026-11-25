@@ -1,0 +1,33 @@
+TASKFLOW — Gestion des tâches
+
+Tâches sauvegardées rechargées : 0
+1. Ajouter une tâche
+2. Afficher les tâches
+3. Marquer une tâche comme terminée
+4. Modifier la priorité d’une tâche
+5. Gérer l’échéance d’une tâche
+6. Sauvegarder les données
+0. Quitter
+
+
+Votre choix : Erreur : choisissez une option de 0 à 6.
+
+Votre choix : Erreur : choisissez une option de 0 à 6.
+
+Votre choix : Erreur : choisissez une option de 0 à 6.
+
+Votre choix : 
+Aucune tâche à afficher.
+
+Votre choix : 
+MARQUER UNE TÂCHE COMME TERMINÉE
+
+Aucune tâche à terminer.
+
+Votre choix : 
+SAUVEGARDE DES DONNÉES
+
+Sauvegarde réussie.
+
+Fermeture de TaskFlow.
+Au revoir !
